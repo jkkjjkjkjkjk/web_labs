@@ -1,0 +1,17 @@
+{
+    "name": "charlik/www",
+    "autoload": {
+        "psr-4": {
+            "Charlik\\Www\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "charlik",
+            "email": "chalovegor@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^8.2"
+    }
+}
