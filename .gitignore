@@ -3,3 +3,6 @@ api_cache.json
 data.txt
 processed_rabbit.log
 processed_kafka.log
+.env.local
+.env.test
+.phpunit.cache/
