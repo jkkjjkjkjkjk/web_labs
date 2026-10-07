@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка на ремонт техники</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #eef2f7;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 28px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { margin: 0 0 20px; font-size: 22px; text-align: center; color: #2c3e50; }
+
+        label.field { display: block; margin-bottom: 14px; font-size: 14px; color: #34495e; }
+
+        input[type="text"], select {
+            width: 100%;
+            margin-top: 6px;
+            padding: 10px;
+            font-size: 15px;
+            background: #f5f8fc;
+            border: 2px solid #c5d0de;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        input[type="text"]:focus, select:focus { background: #fff; border-color: #3498db; }
+
+        fieldset {
+            margin: 0 0 14px;
+            padding: 10px 12px;
+            border: 2px solid #c5d0de;
+            border-radius: 6px;
+            background: #f5f8fc;
+        }
+
+        legend { padding: 0 6px; font-size: 14px; color: #34495e; }
+        .option { display: block; margin: 6px 0; font-size: 14px; cursor: pointer; }
+        .checkbox-row { margin-bottom: 18px; }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: #fff;
+            background: #3498db;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.4s ease, transform 0.2s ease;
+        }
+
+        button:hover { background: #27ae60; transform: translateY(-1px); }
+
+        .links { margin-top: 16px; text-align: center; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Заявка на ремонт техники</h1>
+
+        <form id="demoForm" action="send.php" method="POST">
+            <label class="field">
+                Ваше имя
+                <input type="text" name="username" placeholder="Введите имя" required>
+            </label>
+
+            <label class="field">
+                Модель устройства
+                <input type="text" name="model" placeholder="Например, Lenovo IdeaPad 3" required>
+            </label>
+
+            <label class="field">
+                Услуга
+                <select name="service" required>
+                    <option value="">— выберите услугу —</option>
+                    <option value="Диагностика">Диагностика</option>
+                    <option value="Замена экрана">Замена экрана</option>
+                    <option value="Замена аккумулятора">Замена аккумулятора</option>
+                    <option value="Чистка от пыли">Чистка от пыли</option>
+                    <option value="Ремонт материнской платы">Ремонт материнской платы</option>
+                </select>
+            </label>
+
+            <div class="checkbox-row">
+                <label class="option">
+                    <input type="checkbox" name="warranty" value="1"> Гарантия есть
+                </label>
+            </div>
+
+            <fieldset>
+                <legend>Срок ремонта</legend>
+                <label class="option">
+                    <input type="radio" name="term" value="Срочный (1 день)" required> Срочный (1 день)
+                </label>
+                <label class="option">
+                    <input type="radio" name="term" value="Обычный (3-5 дней)"> Обычный (3-5 дней)
+                </label>
+                <label class="option">
+                    <input type="radio" name="term" value="Без спешки (до 2 недель)"> Без спешки (до 2 недель)
+                </label>
+            </fieldset>
+
+            <button type="submit">Отправить</button>
+        </form>
+
+        <div class="links"><a href="index.php">На главную</a></div>
+    </div>
+
+    <script>
+
+        document.getElementById("demoForm").addEventListener("submit", function () {
+            const term = this.querySelector('input[name="term"]:checked');
+            alert(
+                "Вы ввели:\n" +
+                "Имя: " + this.username.value + "\n" +
+                "Модель: " + this.model.value + "\n" +
+                "Услуга: " + this.service.value + "\n" +
+                "Гарантия: " + (this.warranty.checked ? "есть" : "нет") + "\n" +
+                "Срок ремонта: " + (term ? term.value : "не выбран")
+            );
+        });
+    </script>
+</body>
+</html>

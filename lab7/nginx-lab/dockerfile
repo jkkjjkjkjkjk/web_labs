@@ -1,0 +1,13 @@
+FROM php:8.2-fpm
+
+RUN apt-get update && apt-get install -y git unzip librdkafka-dev \
+    && docker-php-ext-install pdo pdo_mysql \
+    && pecl install rdkafka \
+    && docker-php-ext-enable rdkafka \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-install sockets
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /usr/share/nginx/html
